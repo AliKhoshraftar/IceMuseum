@@ -1,4 +1,4 @@
-package com.plcoding.cryptocurrencyappyt.presentation.ui.theme
+package com.icemobile.museum.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

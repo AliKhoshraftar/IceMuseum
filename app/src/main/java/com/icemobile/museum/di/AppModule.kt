@@ -1,13 +1,17 @@
-package com.plcoding.cryptocurrencyappyt.di
+package com.icemobile.museum.di
 
-import com.plcoding.cryptocurrencyappyt.common.Constants
-import com.plcoding.cryptocurrencyappyt.data.remote.CoinPaprikaApi
-import com.plcoding.cryptocurrencyappyt.data.repository.CoinRepositoryImpl
-import com.plcoding.cryptocurrencyappyt.domain.repository.CoinRepository
+import com.icemobile.museum.BuildConfig
+import com.icemobile.museum.common.Constants
+import com.icemobile.museum.data.remote.common.interceptor.AuthenticationInterceptor
+import com.icemobile.museum.data.remote.retrofit.CollectionRetrofitService
+import com.icemobile.museum.data.repository.collection.CollectionRepositoryImpl
+import com.icemobile.museum.domain.repository.CollectionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,17 +22,31 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePaprikaApi(): CoinPaprikaApi {
-        return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+    fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient().newBuilder()
+            // Add pass apiKey for every api request instead of putting on every retrofit methods
+            // Also Api key is added to local.properties to be more secure (local.properties normally won't add to git)
+            .addInterceptor(AuthenticationInterceptor(BuildConfig.API_KEY))
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .build()
-            .create(CoinPaprikaApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCoinRepository(api: CoinPaprikaApi): CoinRepository {
-        return CoinRepositoryImpl(api)
+    fun provideCollectionRetrofitService(okHttpClient: OkHttpClient): CollectionRetrofitService {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(CollectionRetrofitService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoinRepository(api: CollectionRetrofitService): CollectionRepository {
+        return CollectionRepositoryImpl(api)
     }
 }

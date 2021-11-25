@@ -1,4 +1,4 @@
-package ir.businesscard.bcard.common
+package com.icemobile.museum.common
 
 
 sealed class Response<T>(val data: T? = null, val message: String? = null) {

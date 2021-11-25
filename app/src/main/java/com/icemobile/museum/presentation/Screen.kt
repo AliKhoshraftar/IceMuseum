@@ -1,6 +1,6 @@
-package com.plcoding.cryptocurrencyappyt.presentation
+package com.icemobile.museum.presentation
 
 sealed class Screen(val route: String) {
-    object CoinListScreen: Screen("coin_list_screen")
-    object CoinDetailScreen: Screen("coin_detail_screen")
+    object CollectionListScreen : Screen("collection_list_screen")
+    object CollectionDetailScreen : Screen("collection_detail_screen")
 }

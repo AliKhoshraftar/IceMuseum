@@ -1,8 +1,8 @@
-package ir.businesscard.bcard.common
+package com.icemobile.museum.common
 
 object Constants {
 
-    const val BASE_URL = "https://api.coinpaprika.com/v1/"
+    const val BASE_URL = "https://www.rijksmuseum.nl/api/"
 
-    const val PARAM_COIN_ID = "coinId"
+    const val PARAM_COLLECTION_ID = "collectionId"
 }

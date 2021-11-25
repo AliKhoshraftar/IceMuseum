@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.main
+package com.icemobile.museum.presentation.list
 
 import com.icemobile.museum.domain.model.collection.list.Collections
 

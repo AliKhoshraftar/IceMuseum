@@ -1,13 +1,12 @@
-package com.icemobile.museum.presentation.main
+package com.icemobile.museum.presentation.list
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.*
+import com.icemobile.museum.common.Response
+import com.icemobile.museum.domain.model.collection.list.Collections
 import com.icemobile.museum.domain.usecase.get_collections.GetCollectionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ir.businesscard.bcard.common.Response
-import ir.businesscard.bcard.domain.use_case.get_coin.GetCoinUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -17,31 +16,26 @@ class CollectionsViewModel @Inject constructor(
     private val useCase: GetCollectionsUseCase
 ) : ViewModel() {
 
-    private val status = MutableLiveData<CollectionsState>()
-
-    fun getStatus(): LiveData<CollectionsState> {
-        return status
-    }
+    private val _state = mutableStateOf(CollectionsState())
+    val state: State<CollectionsState> = _state
 
     init {
-        getCoins()
+        getCollections(1)
     }
 
-    private fun getCoins() {
-        useCase.execute().onEach {
+    fun getCollections(page: Int = 1) {
+        useCase.execute(page).onEach {
             when (it) {
                 is Response.Error -> {
-                    status.postValue(
-                        CoinsListState(
-                            error = it.message ?: "An unexpected error occurred"
-                        )
-                    )
+                    _state.value =
+                        CollectionsState(error = it.message ?: "An unexpected error occurred")
                 }
                 is Response.Loading -> {
-                    status.postValue(CoinsListState(isLoading = true))
+                    _state.value = (CollectionsState(isLoading = true))
                 }
                 is Response.Success -> {
-                    status.postValue(CoinsListState(coins = it.data ?: emptyList()))
+                    _state.value =
+                        (CollectionsState(collections = it.data ?: Collections(0, emptyList())))
                 }
             }
         }.launchIn(viewModelScope)

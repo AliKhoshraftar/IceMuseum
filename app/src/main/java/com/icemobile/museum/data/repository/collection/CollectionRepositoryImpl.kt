@@ -1,4 +1,4 @@
-package com.icemobile.museum.data.repository
+package com.icemobile.museum.data.repository.collection
 
 import com.icemobile.museum.data.remote.model.collection.list.CollectionsDTO
 import com.icemobile.museum.data.remote.retrofit.CollectionRetrofitService
@@ -9,8 +9,8 @@ class CollectionRepositoryImpl @Inject constructor(
     private val collectionRetrofitService: CollectionRetrofitService
 ) : CollectionRepository {
 
-    override suspend fun getCollections(): CollectionsDTO {
-        return collectionRetrofitService.getCollections()
+    override suspend fun getCollections(page: Int): CollectionsDTO {
+        return collectionRetrofitService.getCollections(page = page)
     }
 
 }

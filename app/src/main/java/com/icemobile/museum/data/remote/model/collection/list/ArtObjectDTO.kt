@@ -3,9 +3,10 @@ package com.icemobile.museum.data.remote.model.collection.list
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.icemobile.museum.domain.model.collection.list.ArtObject
 
 @Keep
-data class ArtObject(
+data class ArtObjectDTO(
     @SerializedName("id")
     val id: String,
     @SerializedName("links")
@@ -30,4 +31,14 @@ data class ArtObject(
     val headerImage: HeaderImage,
     @SerializedName("productionPlaces")
     val productionPlaces: List<String>
+)
+
+fun ArtObjectDTO.toArtObject() = ArtObject(
+    id = id,
+    links = links,
+    objectNumber = objectNumber,
+    title = title,
+    hasImage = hasImage,
+    principalOrFirstMaker = principalOrFirstMaker,
+    headerImage = headerImage
 )

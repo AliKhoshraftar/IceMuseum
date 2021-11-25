@@ -1,4 +1,4 @@
-package com.icemobile.museum.data.remote.model
+package com.icemobile.museum.data.remote.model.collection.list
 
 
 import com.google.gson.annotations.SerializedName

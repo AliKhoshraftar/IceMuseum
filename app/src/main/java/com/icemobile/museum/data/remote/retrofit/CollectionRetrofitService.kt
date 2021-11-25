@@ -1,16 +1,20 @@
-package ir.businesscard.bcard.data.remote.retrofit
+package com.icemobile.museum.data.remote.retrofit
 
-import ir.businesscard.bcard.data.remote.dto.coin.CoinDTO
-import ir.businesscard.bcard.data.remote.dto.coin.CoinDetailDTO
+import com.icemobile.museum.data.remote.common.Culture
+import com.icemobile.museum.data.remote.model.collection.list.CollectionsDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
-interface CoinRetrofitService {
+interface CollectionRetrofitService {
 
-    @GET("coins")
-    suspend fun getCoins(): List<CoinDTO>
+    @GET("{culture}/collection")
+    suspend fun getCollections(
+        @Path("culture") culture: String = Culture.ENGLISH.code,
+        @Query("p") page: Int
+    ): CollectionsDTO
 
-    @GET("coins/{coin_id}")
-    suspend fun getCoin(@Path("coin_id") coinId: String): CoinDetailDTO
+//    @GET("{culture}/collection/{object-number}")
+//    suspend fun getCoin(@Path("coin_id") coinId: String): CoinDetailDTO
 
 }

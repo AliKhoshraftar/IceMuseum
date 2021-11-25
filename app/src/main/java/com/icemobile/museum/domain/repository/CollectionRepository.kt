@@ -1,9 +1,8 @@
-package ir.businesscard.bcard.domain.repository
+package com.icemobile.museum.domain.repository
 
-import ir.businesscard.bcard.data.remote.dto.coin.CoinDTO
-import ir.businesscard.bcard.data.remote.dto.coin.CoinDetailDTO
+import com.icemobile.museum.data.remote.model.collection.list.CollectionsDTO
 
-interface CoinRepository {
-    suspend fun getCoins(): List<CoinDTO>
-    suspend fun getCoinDetail(coinId: String): CoinDetailDTO
+interface CollectionRepository {
+    suspend fun getCollections(page: Int): CollectionsDTO
+//    suspend fun getCoinDetail(coinId: String): CoinDetailDTO
 }
