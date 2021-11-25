@@ -46,7 +46,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoinRepository(api: CollectionRetrofitService): CollectionRepository {
+    fun provideCollectionRepository(api: CollectionRetrofitService): CollectionRepository {
         return CollectionRepositoryImpl(api)
     }
 }

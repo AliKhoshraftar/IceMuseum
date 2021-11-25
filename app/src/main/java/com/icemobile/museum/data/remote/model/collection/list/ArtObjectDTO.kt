@@ -3,6 +3,7 @@ package com.icemobile.museum.data.remote.model.collection.list
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.icemobile.museum.data.remote.model.collection.share.WebImage
 import com.icemobile.museum.domain.model.collection.list.ArtObject
 
 @Keep
@@ -40,5 +41,8 @@ fun ArtObjectDTO.toArtObject() = ArtObject(
     title = title,
     hasImage = hasImage,
     principalOrFirstMaker = principalOrFirstMaker,
-    headerImage = headerImage
+    headerImage = headerImage,
+    // Bellow parameters added to this model according to the problem with detail API
+    longTitle = longTitle,
+    webImage = webImage
 )

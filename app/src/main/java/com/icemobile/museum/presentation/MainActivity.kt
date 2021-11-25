@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.icemobile.museum.R
+import com.icemobile.museum.presentation.detail.CollectionDetailScreen
 import com.icemobile.museum.presentation.list.CollectionListScreen
 import com.icemobile.museum.presentation.ui.theme.MuseumAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,16 +26,20 @@ class MainActivity : AppCompatActivity() {
                         navController = navController,
                         startDestination = Screen.CollectionListScreen.route
                     ) {
+
+                        // List Screen
                         composable(
                             route = Screen.CollectionListScreen.route
                         ) {
                             CollectionListScreen(navController)
                         }
-//                        composable(
-//                            route = Screen.CollectionDetailScreen.route + "/{collectionId}"
-//                        ) {
-//                            CollectionDetailScreen()
-//                        }
+
+                        // Collection Detail Screen
+                        composable(
+                            route = Screen.CollectionDetailScreen.route + "/{collectionId}"
+                        ) {
+                            CollectionDetailScreen()
+                        }
                     }
                 }
             }
