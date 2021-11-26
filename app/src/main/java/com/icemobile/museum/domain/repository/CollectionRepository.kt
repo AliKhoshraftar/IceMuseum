@@ -4,6 +4,6 @@ import com.icemobile.museum.data.remote.model.collection.detail.CollectionDetail
 import com.icemobile.museum.data.remote.model.collection.list.CollectionsDTO
 
 interface CollectionRepository {
-    suspend fun getCollections(page: Int): CollectionsDTO
+    suspend fun getCollections(page: Int, query: String): CollectionsDTO
     suspend fun getCollectionDetail(objectNumber: String): CollectionDetailDTO
 }

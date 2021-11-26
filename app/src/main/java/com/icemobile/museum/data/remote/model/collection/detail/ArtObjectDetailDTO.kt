@@ -57,7 +57,6 @@ data class ArtObjectDetailDTO(
 
 fun ArtObjectDetailDTO.toArtObjectDetail() = ArtObjectDetail(
     id = id,
-    links = links,
     objectNumber = objectNumber,
     title = title,
     description = description,

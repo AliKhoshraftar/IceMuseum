@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">IceMuseum</string>
+
+
+    <string name="collection_detail_back">Back</string>
+
 </resources>

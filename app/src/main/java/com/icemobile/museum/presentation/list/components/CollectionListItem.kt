@@ -14,12 +14,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.icemobile.museum.data.remote.model.collection.list.HeaderImage
-import com.icemobile.museum.data.remote.model.collection.list.Links
 import com.icemobile.museum.domain.model.collection.list.ArtObject
+import com.icemobile.museum.R
 
 @Composable
 fun CollectionListItem(
@@ -29,11 +27,13 @@ fun CollectionListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
-            .clickable { onItemClick(art) }
+            .height(200.dp)
             .padding(10.dp),
     ) {
-        Card(elevation = 10.dp) {
+        Card(elevation = 10.dp,
+            modifier = Modifier
+                .clickable { onItemClick(art) }
+        ) {
             Image(
                 painter = rememberImagePainter(data = art.headerImage.url,
                     builder = {
@@ -83,21 +83,3 @@ fun CollectionListItem(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun test() {
-//    CollectionListItem(
-//        art = ArtObject(
-//            "",
-//            Links("", ""),
-//            "",
-//            "TitleTidsdsds",
-//            true,
-//            principalOrFirstMaker = "Author",
-//            HeaderImage("", 10, 10, 10, 10, "")
-//        )
-//    ) {
-//
-//    }
-//}

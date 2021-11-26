@@ -42,7 +42,8 @@ fun ArtObjectDTO.toArtObject() = ArtObject(
     hasImage = hasImage,
     principalOrFirstMaker = principalOrFirstMaker,
     headerImage = headerImage,
-    // Bellow parameters added to this model according to the problem with detail API
+    // TODO Bellow parameters added to this model according to the problem with detail API
     longTitle = longTitle,
-    webImage = webImage
+    webImage = webImage,
+    description = longTitle.repeat(20)
 )

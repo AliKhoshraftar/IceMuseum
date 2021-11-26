@@ -13,10 +13,10 @@ import javax.inject.Inject
 class GetCollectionsUseCase @Inject constructor(
     private val collectionRepository: CollectionRepository
 ) {
-    fun execute(page: Int): Flow<Response<Collections>> = flow {
+    fun execute(page: Int, query: String): Flow<Response<Collections>> = flow {
         try {
             emit(Response.Loading())
-            val coins = collectionRepository.getCollections(page).toCollections()
+            val coins = collectionRepository.getCollections(page, query).toCollections()
             emit(Response.Success(coins))
         } catch (e: HttpException) {
             emit(Response.Error(message = if (e.message != null) e.message else "An Unexpected problem occurred"))
