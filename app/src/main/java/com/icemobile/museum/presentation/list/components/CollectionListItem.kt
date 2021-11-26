@@ -17,7 +17,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.icemobile.museum.domain.model.collection.list.ArtObject
-import com.icemobile.museum.R
 
 @Composable
 fun CollectionListItem(
@@ -30,7 +29,7 @@ fun CollectionListItem(
             .height(200.dp)
             .padding(10.dp),
     ) {
-        Card(elevation = 10.dp,
+        Card(elevation = 12.dp,
             modifier = Modifier
                 .clickable { onItemClick(art) }
         ) {
@@ -67,14 +66,14 @@ fun CollectionListItem(
                 ) {
                     Text(
                         text = art.title,
-                        style = MaterialTheme.typography.h3,
+                        style = MaterialTheme.typography.h2,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
                     Spacer(modifier = Modifier.height(7.dp))
                     Text(
                         text = art.principalOrFirstMaker,
-                        style = MaterialTheme.typography.subtitle2,
+                        style = MaterialTheme.typography.subtitle1,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
