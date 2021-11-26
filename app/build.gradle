@@ -26,8 +26,11 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,6 +50,27 @@ android {
     buildFeatures {
         viewBinding true
         compose = true
+    }
+
+    flavorDimensions "culture"
+    productFlavors {
+        MuseumEN {
+            applicationIdSuffix ".en"
+            versionNameSuffix "-EN"
+        }
+        MuseumNL {
+            applicationIdSuffix ".nl"
+            versionNameSuffix "-NL"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        println("Iterating variant: " + variant.getName())
+        if (variant.getName() == "MuseumENDebug" || variant.getName() == "MuseumENRelease") {
+            variant.buildConfigField "String", "Culture", "\"en\""
+        } else if (variant.getName() == "MuseumNLDebug" || variant.getName() == "MuseumNLRelease"){
+            variant.buildConfigField "String", "Culture", "\"nl\""
+        }
     }
 }
 
