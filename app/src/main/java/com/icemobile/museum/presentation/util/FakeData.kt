@@ -1,10 +1,11 @@
-package com.icemobile.museum.util
+package com.icemobile.museum.presentation.util
 
 import com.icemobile.museum.data.remote.model.collection.share.WebImage
 import com.icemobile.museum.domain.model.collection.detail.ArtObjectDetail
 
 class FakeData {
     companion object {
+
         fun getFakeArt(objectNumber: String): ArtObjectDetail {
             return arts[0]
         }

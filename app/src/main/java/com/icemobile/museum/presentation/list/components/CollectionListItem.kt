@@ -66,6 +66,7 @@ fun CollectionListItem(
                 ) {
                     Text(
                         text = art.title,
+                        color = Color.White,
                         style = MaterialTheme.typography.h2,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
@@ -73,6 +74,7 @@ fun CollectionListItem(
                     Spacer(modifier = Modifier.height(7.dp))
                     Text(
                         text = art.principalOrFirstMaker,
+                        color = Color.White,
                         style = MaterialTheme.typography.subtitle1,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1

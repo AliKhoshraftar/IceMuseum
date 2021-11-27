@@ -10,7 +10,7 @@ import com.icemobile.museum.common.Constants.EMPTY
 import com.icemobile.museum.common.Response
 import com.icemobile.museum.domain.model.collection.detail.CollectionDetail
 import com.icemobile.museum.domain.usecase.get_collection_detail.GetCollectionDetailUseCase
-import com.icemobile.museum.util.FakeData
+import com.icemobile.museum.presentation.util.FakeData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
