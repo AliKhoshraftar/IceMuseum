@@ -1,6 +1,9 @@
 name: Dev Workflow - Test and check thing
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - implement-cicd
 
 jobs:
   build:
