@@ -29,7 +29,7 @@ jobs:
 
       - name: Read local.properties
         id: getlocal
-        run: echo "::set-output name=local::$(cat ./local.properties)"
+        run: echo "::set-output name=localpro::$(cat ./local.properties)"
 
       - name: Access SIGNING_INFO
         env:
