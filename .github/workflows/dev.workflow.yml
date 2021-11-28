@@ -21,6 +21,10 @@ jobs:
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/sign.jks
 
           echo ${TMP_KEYSTORE_FILE_PATH}
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
 
       - name: Access API_KEY
         env:
@@ -49,11 +53,6 @@ jobs:
       - name: Read gradle.properties
         id: getgradle
         run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
-
-#      - name: Set Up JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 11
 
       #      - name: Run Tests
       #        run: ./gradlew test
