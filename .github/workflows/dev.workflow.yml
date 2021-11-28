@@ -16,7 +16,7 @@ jobs:
         env:
           ENCODED_STRING: ${{ secrets.KEYSTORE }}
         run: |
-          TMP_KEYSTORE_FILE_PATH="${{ github.workspace}}"/keystore
+          TMP_KEYSTORE_FILE_PATH="${{ github.workspace}}"app/keystore
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/sign.jks
 
@@ -38,10 +38,6 @@ jobs:
           echo SIGNING_STORE_PASSWORD=$SIGNING_STORE_PASSWORD >> ./gradle.properties
           echo SIGNING_KEY_ALIAS=$SIGNING_KEY_ALIAS >> ./gradle.properties
           echo SIGNING_KEY_PASSWORD=$SIGNING_KEY_PASSWORD >> ./gradle.properties
-
-      - name: Read gradle.properties
-        id: getgradle
-        run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
