@@ -42,7 +42,7 @@ jobs:
       - name: Send message telegram
         uses: appleboy/telegram-action@master
         with:
-          to: 1606745035
+          to: 57417003
           token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
           message: Send test message from github
 
