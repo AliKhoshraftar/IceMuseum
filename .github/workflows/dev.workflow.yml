@@ -27,6 +27,10 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
         run: echo API_KEY=\"$API_KEY\" > ./local.properties
 
+      - name: Read local.properties
+        id: getlocal
+        run: echo "::set-output name=local::$(cat ./local.properties)"
+
       - name: Access SIGNING_INFO
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
@@ -45,10 +49,6 @@ jobs:
       - name: Read gradle.properties
         id: getgradle
         run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
-
-      - name: Read local.properties
-        id: getlocal
-        run: echo "::set-output name=local::$(cat ./local.properties)"
 
 #      - name: Set Up JDK
 #        uses: actions/setup-java@v1
