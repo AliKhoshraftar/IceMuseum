@@ -19,8 +19,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build Project
-        run: ./gradlew assemble
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build Production
+        run: ./gradlew app:bundleRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
