@@ -1,9 +1,9 @@
-name: Android Build
+name: Master Workflow - Build and deploy to production
 
 on:
   push:
     branches:
-      - implement-cicd
+      - master
 
 jobs:
   build:
