@@ -11,6 +11,9 @@
 /build
 app/keystore
 *.apk
+*.ap_
+*.aab
+*output-metadata.json
 /captures
 .externalNativeBuild
 .cxx
