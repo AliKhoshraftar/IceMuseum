@@ -50,21 +50,21 @@ jobs:
       - name: Assemble Release Bundle
         run: |
           ./gradlew assembleMuseumENRelease
-          ./gradlew assembleMuseumNLRelease
+#          ./gradlew assembleMuseumNLRelease
 
-      - uses: r0adkll/sign-android-release@v1
-        name: Sign app APK
+#      - uses: r0adkll/sign-android-release@v1
+#        name: Sign app APK
         # ID used to access action output
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.KEYSTORE }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        env:
-          # override default build-tools version (29.0.3) -- optional
-          BUILD_TOOLS_VERSION: "30.0.2"
+#        id: sign_app
+#        with:
+#          releaseDirectory: app/build/outputs/apk/release
+#          signingKeyBase64: ${{ secrets.KEYSTORE }}
+#          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+#          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+#        env:
+#          # override default build-tools version (29.0.3) -- optional
+#          BUILD_TOOLS_VERSION: "30.0.2"
 
       - name: Upload
         uses: actions/upload-artifact@v2
@@ -72,7 +72,7 @@ jobs:
           name: Build Artifacts
           path: |
             app/build/outputs/apk/MuseumEN/release
-            app/build/outputs/apk/MuseumNL/release
+#            app/build/outputs/apk/MuseumNL/release
 #      - uses: actions/upload-artifact@v2
 #        with:
 #          name: Signed app bundle
