@@ -47,8 +47,8 @@ jobs:
         run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
 
       - name: Read local.properties
-          id: getlocal
-          run: echo "::set-output name=local::$(cat ./local.properties)"
+        id: getlocal
+        run: echo "::set-output name=local::$(cat ./local.properties)"
 
 #      - name: Set Up JDK
 #        uses: actions/setup-java@v1
