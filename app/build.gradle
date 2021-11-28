@@ -53,7 +53,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("keystore/sign.jks")
+            storeFile file("/home/runner/work/_temp/keystore/sign.jks")
             storePassword SIGNING_STORE_PASSWORD
             keyAlias SIGNING_KEY_ALIAS
             keyPassword SIGNING_KEY_PASSWORD
