@@ -37,6 +37,9 @@ jobs:
         id: getlocal
         run: echo "::set-output name=localpro::$(cat ./local.properties)"
 
+      - name: Test output
+          run: echo ${{ steps.vars.outputs.localpro }}
+
       - name: Access SIGNING_INFO
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
