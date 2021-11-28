@@ -41,33 +41,40 @@ jobs:
           echo ${SIGNING_KEY_ALIAS}
           echo ${SIGNING_KEY_PASSWORD}
 
-      - name: Set Up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
+      - name: Read Gradle file
+        id: getgradle
+        run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
+
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.gradle }}
+
+#      - name: Set Up JDK
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
 
       #      - name: Run Tests
       #        run: ./gradlew test
 
-      - name: Assemble Release Bundle
-        run: |
-          ./gradlew assembleRelease
-
-      - uses: r0adkll/sign-android-release@v1
-        name: Sign app APK
-        # ID used to access action output
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.KEYSTORE }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        env:
-          # override default build-tools version (29.0.3) -- optional
-          BUILD_TOOLS_VERSION: "30.0.2"
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Signed app bundle
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+#      - name: Assemble Release Bundle
+#        run: |
+#          ./gradlew assembleRelease
+#
+#      - uses: r0adkll/sign-android-release@v1
+#        name: Sign app APK
+#        # ID used to access action output
+#        id: sign_app
+#        with:
+#          releaseDirectory: app/build/outputs/apk/release
+#          signingKeyBase64: ${{ secrets.KEYSTORE }}
+#          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+#          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+#        env:
+#          # override default build-tools version (29.0.3) -- optional
+#          BUILD_TOOLS_VERSION: "30.0.2"
+#
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: Signed app bundle
+#          path: ${{steps.sign_app.outputs.signedReleaseFile}}
