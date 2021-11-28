@@ -9,12 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-#      - name: Decode Keystore
-#        id: decode_keystore
-#        uses: timheuer/base64-to-file@v1
-#        with:
-#          fileName: 'sign.jks'
-#          encodedString: ${{ secrets.KEYSTORE }}
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: 'sign.jks'
+          encodedString: ${{ secrets.KEYSTORE }}
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
