@@ -23,7 +23,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_KEY", credentialProperty['API_KEY'])
-        buildConfigField "String", "Culture", "\"en\""
     }
 
     compileOptions {
@@ -56,16 +55,6 @@ android {
     }
 
     signingConfigs {
-//        release {
-//            storeFile file("/home/runner/work/_temp/keystore/sign.jks")
-//            storePassword SIGNING_STORE_PASSWORD
-//            keyAlias SIGNING_KEY_ALIAS
-//            keyPassword SIGNING_KEY_PASSWORD
-//
-//            v1SigningEnabled true
-//            v2SigningEnabled true
-//        }
-
         release {
             storeFile file("keystore/sign.jks")
             storePassword SIGNING_STORE_PASSWORD
@@ -88,26 +77,29 @@ android {
         }
     }
 
-//    flavorDimensions "culture"
-//    productFlavors {
-//        MuseumEN {
-//            applicationIdSuffix ".en"
-//            versionNameSuffix "-EN"
-//        }
-//        MuseumNL {
-//            applicationIdSuffix ".nl"
-//            versionNameSuffix "-NL"
-//        }
-//    }
-//
-//    applicationVariants.all { variant ->
-//        println("Iterating variant: " + variant.getName())
-//        if (variant.getName() == "MuseumENDebug" || variant.getName() == "MuseumENRelease") {
-//            variant.buildConfigField "String", "Culture", "\"en\""
-//        } else if (variant.getName() == "MuseumNLDebug" || variant.getName() == "MuseumNLRelease"){
-//            variant.buildConfigField "String", "Culture", "\"nl\""
-//        }
-//    }
+    flavorDimensions "culture"
+    productFlavors {
+        MuseumEN {
+            applicationIdSuffix ".en"
+        }
+        MuseumNL {
+            applicationIdSuffix ".nl"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        println("Iterating variant: " + variant.getName())
+        if (variant.getName() == "MuseumENDebug" || variant.getName() == "MuseumENRelease") {
+            variant.buildConfigField "String", "Culture", "\"en\""
+        } else if (variant.getName() == "MuseumNLDebug" || variant.getName() == "MuseumNLRelease") {
+            variant.buildConfigField "String", "Culture", "\"nl\""
+        }
+        variant.outputs.all {
+            def flavor = variant.name.replace("Release","")
+            def versionName = variant.versionName
+            outputFileName = "${flavor}-Release-${versionName}.apk"
+        }
+    }
 }
 
 dependencies {
