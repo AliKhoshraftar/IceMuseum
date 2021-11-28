@@ -11,6 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Send Initial message telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: 57417003
+          token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
+          message: Hi Leonardo & Jan, CI/CD started on Github. I will notify you if it get done. Tnx for your patience :)
+
       - name: Decode Keystore
         id: decode_keystore
         env:
@@ -39,34 +46,41 @@ jobs:
           echo SIGNING_KEY_ALIAS=$SIGNING_KEY_ALIAS >> ./gradle.properties
           echo SIGNING_KEY_PASSWORD=$SIGNING_KEY_PASSWORD >> ./gradle.properties
 
-      - name: Send message telegram
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Run Tests
+        run: ./gradlew test
+
+      - name: Send test pass message telegram
         uses: appleboy/telegram-action@master
         with:
           to: 57417003
           token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
-          message: Send test message from github
+          message: Congratulation. Tests passed, Here we are going to build APK & AAB Files.
 
-#      - name: Set Up JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 11
-#
-#      #      - name: Run Tests
-#      #        run: ./gradlew test
-#
-#      - name: Assemble Release Bundle
-#        run: |
-#          ./gradlew assembleMuseumENRelease
+      - name: Assemble Release Bundle
+        run: |
+          ./gradlew assembleMuseumENRelease
 #          ./gradlew assembleMuseumNLRelease
 #          ./gradlew bundleMuseumENRelease
 #          ./gradlew bundleMuseumNLRelease
-#
-#      - name: Upload
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: Build Artifacts
-#          path: |
-#            app/build/outputs/apk/MuseumEN/release
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Artifacts
+          path: |
+            app/build/outputs/apk/MuseumEN/release
 #            app/build/outputs/apk/MuseumNL/release
 #            app/build/outputs/bundle/MuseumNLRelease
 #            app/build/outputs/bundle/MuseumENRelease
+
+      - name: Send test pass message telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: 57417003
+          token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
+          message: Yeeees, Good job. you can see the results on github action. Have fun :)
