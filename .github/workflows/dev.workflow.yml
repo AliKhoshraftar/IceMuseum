@@ -16,11 +16,30 @@ jobs:
         env:
           ENCODED_STRING: ${{ secrets.KEYSTORE }}
         run: |
-          TMP_KEYSTORE_FILE_PATH="${GITHUB_ACTION_PATH}"/keystore
+          TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/sign.jks
 
           echo ${TMP_KEYSTORE_FILE_PATH}
+
+      - name: Access API_KEY
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: echo API_KEY=\"$API_KEY\" > ./local.properties
+
+      - name: Access SIGNING_INFO
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          echo SIGNING_STORE_PASSWORD=\"$SIGNING_STORE_PASSWORD\" > ./gradle.properties
+          echo SIGNING_KEY_ALIAS=\"$SIGNING_KEY_ALIAS\" >> ./gradle.properties
+          echo SIGNING_KEY_PASSWORD=\"$SIGNING_KEY_PASSWORD\" >> ./gradle.properties
+
+          echo ${SIGNING_STORE_PASSWORD}
+          echo ${SIGNING_KEY_ALIAS}
+          echo ${SIGNING_KEY_PASSWORD}
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
