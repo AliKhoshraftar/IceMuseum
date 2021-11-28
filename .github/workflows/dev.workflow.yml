@@ -41,9 +41,9 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: |
           echo >> ./gradle.properties
-          echo SIGNING_STORE_PASSWORD=\"$SIGNING_STORE_PASSWORD\" >> ./gradle.properties
-          echo SIGNING_KEY_ALIAS=\"$SIGNING_KEY_ALIAS\" >> ./gradle.properties
-          echo SIGNING_KEY_PASSWORD=\"$SIGNING_KEY_PASSWORD\" >> ./gradle.properties
+          echo SIGNING_STORE_PASSWORD=$SIGNING_STORE_PASSWORD >> ./gradle.properties
+          echo SIGNING_KEY_ALIAS=$SIGNING_KEY_ALIAS >> ./gradle.properties
+          echo SIGNING_KEY_PASSWORD=$SIGNING_KEY_PASSWORD >> ./gradle.properties
 
       - name: Read gradle.properties
         id: getgradle
