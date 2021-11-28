@@ -6,9 +6,9 @@ plugins {
     id 'kotlin-kapt'
 }
 
-def credentials = rootProject.file("local.properties")
-def credentialProperty = new Properties()
-credentialProperty.load(new FileInputStream(credentials))
+//def credentials = rootProject.file("local.properties")
+//def credentialProperty = new Properties()
+//credentialProperty.load(new FileInputStream(credentials))
 
 android {
     compileSdk 31
@@ -22,7 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_KEY", credentialProperty['apiKey'])
+        buildConfigField("String", "API_KEY", API_KEY)
     }
 
     compileOptions {
