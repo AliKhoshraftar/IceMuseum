@@ -50,7 +50,7 @@ jobs:
       - name: Assemble Release Bundle
         run: |
           ./gradlew assembleMuseumENRelease
-#          ./gradlew assembleMuseumNLRelease
+          ./gradlew assembleMuseumNLRelease
 
 #      - uses: r0adkll/sign-android-release@v1
 #        name: Sign app APK
@@ -72,7 +72,7 @@ jobs:
           name: Build Artifacts
           path: |
             app/build/outputs/apk/MuseumEN/release
-#            app/build/outputs/apk/MuseumNL/release
+            app/build/outputs/apk/MuseumNL/release
 #      - uses: actions/upload-artifact@v2
 #        with:
 #          name: Signed app bundle
