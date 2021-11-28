@@ -42,11 +42,14 @@ jobs:
           echo ${SIGNING_KEY_ALIAS}
           echo ${SIGNING_KEY_PASSWORD}
 
-      - name: Read Gradle files
+      - name: Read gradle.properties
         id: getgradle
-        run: |
-          echo "::set-output name=gradle::$(cat ./gradle.properties)"
-          echo "::set-output name=local::$(cat ./local.properties)"
+        run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
+
+      - name: Read local.properties
+          id: getlocal
+          run: echo "::set-output name=local::$(cat ./local.properties)"
+
 #      - name: Set Up JDK
 #        uses: actions/setup-java@v1
 #        with:
