@@ -16,7 +16,7 @@ jobs:
         env:
           ENCODED_STRING: ${{ secrets.KEYSTORE }}
         run: |
-          TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
+          TMP_KEYSTORE_FILE_PATH="${{ github.workspace}}"/keystore
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/sign.jks
 
@@ -27,13 +27,6 @@ jobs:
         env:
           API_KEY: ${{ secrets.API_KEY }}
         run: echo API_KEY=\"$API_KEY\" > ./local.properties
-
-#      - name: Read local.properties
-#        id: getlocal
-#        run: echo "::set-output name=localpro::$(cat ./local.properties)"
-
-#      - name: Test output
-#        run: echo ${{ steps.vars.outputs.localpro }}
 
       - name: Access SIGNING_INFO
         env:
@@ -50,38 +43,37 @@ jobs:
         id: getgradle
         run: echo "::set-output name=gradle::$(cat ./gradle.properties)"
 
-#      - name: Set Up JDK
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 11
-#
-#      #      - name: Run Tests
-#      #        run: ./gradlew test
-#
-#      - name: Assemble Release Bundle
-#        run: |
-#          ./gradlew assembleRelease
-#
-#      - uses: r0adkll/sign-android-release@v1
-#        name: Sign app APK
-#        # ID used to access action output
-#        id: sign_app
-#        with:
-#          releaseDirectory: app/build/outputs/apk/release
-#          signingKeyBase64: ${{ secrets.KEYSTORE }}
-#          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-#          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
-#          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-#        env:
-#          # override default build-tools version (29.0.3) -- optional
-#          BUILD_TOOLS_VERSION: "30.0.2"
-#
-#
-#      - name: Upload
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: Build Artifacts
-#          path: app/build/outputs/
+      - name: Set Up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      #      - name: Run Tests
+      #        run: ./gradlew test
+
+      - name: Assemble Release Bundle
+        run: |
+          ./gradlew assembleRelease
+
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK
+        # ID used to access action output
+        id: sign_app
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "30.0.2"
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Artifacts
+          path: app/build/outputs/
 #      - uses: actions/upload-artifact@v2
 #        with:
 #          name: Signed app bundle
