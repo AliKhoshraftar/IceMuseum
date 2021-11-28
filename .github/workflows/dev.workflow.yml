@@ -16,11 +16,11 @@ jobs:
         with:
           java-version: 11
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+#      - name: Make gradlew executable
+#        run: chmod +x ./gradlew
 
-      - name: Run Tests
-        run: ./gradlew test
+#      - name: Run Tests
+#        run: ./gradlew test
 
       - uses: r0adkll/sign-android-release@v1
         name: Sign app APK
