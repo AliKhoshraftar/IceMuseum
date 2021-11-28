@@ -50,6 +50,11 @@ android {
         }
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     signingConfigs {
         release {
 //            storeFile file("keystore/sign.jks")
@@ -62,7 +67,7 @@ android {
         }
 
         release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/IceMuseum/IceMuseum/app/keystore/"
+            def tmpFilePath = "/home/runner/work/IceMuseum/IceMuseum/app/keystore/"
             def allFilesFromDir = new File(tmpFilePath).listFiles()
 
             if (allFilesFromDir != null) {
