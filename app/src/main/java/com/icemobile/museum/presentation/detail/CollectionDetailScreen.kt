@@ -1,31 +1,24 @@
 package com.icemobile.museum.presentation.detail
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import com.icemobile.museum.R
 import com.icemobile.museum.common.Constants
-import com.icemobile.museum.presentation.Screen
-import com.icemobile.museum.presentation.list.components.CollectionListItem
 
 @Composable
 fun CollectionDetailScreen(
@@ -34,39 +27,88 @@ fun CollectionDetailScreen(
     val state = viewModel.state.value
     val scrollState = rememberScrollState()
 
-
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .verticalScroll(scrollState)
                 .fillMaxSize()
-                .background(MaterialTheme.colors.surface)
         ) {
             Image(
                 painter = rememberImagePainter(data = state.collection?.artObject?.webImage?.url
                     ?: "",
                     builder = {
-                        crossfade(1000)
+                        crossfade(700)
                     }),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(350.dp)
             )
             Text(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = 22.dp, start = 12.dp, end = 12.dp),
+                textAlign = TextAlign.Center,
                 text = state.collection?.artObject?.title ?: Constants.EMPTY,
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.h2,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+                fontSize = 14.sp,
+                maxLines = 2,
+                fontFamily = FontFamily.Serif
             )
-            Spacer(modifier = Modifier.height(7.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             Text(
+                modifier = Modifier
+                    .padding(start = 12.dp, end = 12.dp),
                 text = state.collection?.artObject?.longTitle ?: Constants.EMPTY,
-                style = MaterialTheme.typography.h3,
+                style = MaterialTheme.typography.subtitle1,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 2
+                maxLines = 3,
+                fontFamily = FontFamily.Default
             )
+            Spacer(modifier = Modifier.height(22.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+            ) {
+                Text(
+                    text = if (state.isLoading) "" else "Principal/FirstMaker : ",
+                    style = MaterialTheme.typography.h3,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    fontFamily = FontFamily.Default
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = state.collection?.artObject?.principalOrFirstMaker ?: Constants.EMPTY,
+                    style = MaterialTheme.typography.subtitle2,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    fontFamily = FontFamily.Default
+                )
+            }
+            Spacer(modifier = Modifier.height(22.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+            ) {
+                Text(
+                    text = if (state.isLoading) "" else "Description: ",
+                    style = MaterialTheme.typography.h3,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    fontFamily = FontFamily.Default
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = state.collection?.artObject?.description ?: Constants.EMPTY,
+                    style = MaterialTheme.typography.subtitle2,
+                    fontFamily = FontFamily.Default
+                )
+            }
         }
         if (state.error.isNotBlank()) {
             Text(

@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity() {
         setContent {
             val systemUiController = rememberSystemUiController()
             val useDarkIcons = isSystemInDarkTheme()
+
             SideEffect {
                 systemUiController.setSystemBarsColor(Color.White, darkIcons = useDarkIcons)
             }
             MuseumAppTheme {
+
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
                     NavHost(

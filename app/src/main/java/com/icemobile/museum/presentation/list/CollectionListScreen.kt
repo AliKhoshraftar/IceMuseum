@@ -24,7 +24,7 @@ import com.icemobile.museum.presentation.ui.component.SearchAppBar
 @Composable
 fun CollectionListScreen(
     navController: NavController,
-    viewModel: CollectionsViewModel = hiltViewModel(),
+    viewModel: CollectionsViewModel = hiltViewModel()
 ) {
 
     val arts = viewModel.arts.value
@@ -35,6 +35,7 @@ fun CollectionListScreen(
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
+        backgroundColor = MaterialTheme.colors.background,
         topBar = {
             SearchAppBar(
                 query = query,
@@ -45,10 +46,6 @@ fun CollectionListScreen(
             )
         },
         scaffoldState = scaffoldState,
-        snackbarHost = {
-            scaffoldState.snackbarHostState
-        },
-
         ) {
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn(

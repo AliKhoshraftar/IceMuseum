@@ -36,7 +36,7 @@ fun CollectionListItem(
             Image(
                 painter = rememberImagePainter(data = art.headerImage.url,
                     builder = {
-                        crossfade(800)
+                        crossfade(700)
                     }),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
