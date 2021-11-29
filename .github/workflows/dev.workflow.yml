@@ -12,11 +12,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Send Initial message telegram
-        uses: appleboy/telegram-action@master
+        uses: fjogeleit/http-request-action@master
         with:
-          to: 57417003
-          token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
-          message: Hi Leonardo & Jan, CI/CD started on Github. I will notify you if it get done. Tnx for your patience :)
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Hi Leonardo & Jan, CI/CD started on Github. I will notify you if it get done. Tnx for your patience :)'
+          method: 'GET'
 
       - name: Decode Keystore
         id: decode_keystore
@@ -55,11 +55,11 @@ jobs:
         run: ./gradlew test
 
       - name: Send test pass message telegram
-        uses: appleboy/telegram-action@master
+        uses: fjogeleit/http-request-action@master
         with:
-          to: 57417003
-          token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
-          message: Congratulation. Tests passed, Here we are going to build APK & AAB Files.
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Congratulation. Tests passed, Here we are going to build APK & AAB Files.'
+          method: 'GET'
 
       - name: Assemble Release Bundle
         run: |
@@ -78,9 +78,9 @@ jobs:
 #            app/build/outputs/bundle/MuseumNLRelease
 #            app/build/outputs/bundle/MuseumENRelease
 
-      - name: Send test pass message telegram
-        uses: appleboy/telegram-action@master
+      - name: Send final result message telegram
+        uses: fjogeleit/http-request-action@master
         with:
-          to: 57417003
-          token: 2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk
-          message: Yeeees, Good job. you can see the results on github action. Have fun :)
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Yeeees, Good job. you can see the results on github action. Have fun :)'
+          method: 'GET'
