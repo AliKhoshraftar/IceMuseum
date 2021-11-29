@@ -55,6 +55,10 @@ android {
     }
 
     signingConfigs {
+        debug {
+            minifyEnabled false
+        }
+
         release {
             storeFile file("keystore/sign.jks")
             storePassword SIGNING_STORE_PASSWORD
@@ -95,7 +99,7 @@ android {
             variant.buildConfigField "String", "Culture", "\"nl\""
         }
         variant.outputs.all {
-            def flavor = variant.name.replace("Release","")
+            def flavor = variant.name.replace("Release", "")
             def versionName = variant.versionName
             outputFileName = "${flavor}-Release-${versionName}.apk"
         }

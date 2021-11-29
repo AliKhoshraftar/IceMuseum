@@ -7,11 +7,44 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Send Initial message telegram
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Hi Leonardo and Jan, CI/CD started on Github. I will notify you if it get done. Tnx for your patience :)'
+          method: 'GET'
+
+      - name: Decode Keystore
+        id: decode_keystore
+        env:
+          ENCODED_STRING: ${{ secrets.KEYSTORE }}
+        run: |
+          TMP_KEYSTORE_FILE_PATH="${{ github.workspace}}"/app/keystore
+          mkdir "${TMP_KEYSTORE_FILE_PATH}"
+          echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/sign.jks
+
+          echo ${TMP_KEYSTORE_FILE_PATH}
+          echo ${{ github.workspace}}
+
+      - name: Access API_KEY
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: echo API_KEY=\"$API_KEY\" > ./local.properties
+
+      - name: Access SIGNING_INFO
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          echo >> ./gradle.properties
+          echo SIGNING_STORE_PASSWORD=$SIGNING_STORE_PASSWORD >> ./gradle.properties
+          echo SIGNING_KEY_ALIAS=$SIGNING_KEY_ALIAS >> ./gradle.properties
+          echo SIGNING_KEY_PASSWORD=$SIGNING_KEY_PASSWORD >> ./gradle.properties
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
@@ -21,5 +54,34 @@ jobs:
       - name: Run Tests
         run: ./gradlew test
 
-      - name : Build Project
-        run: ./gradlew assemble
+      - name: Send test pass message telegram
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Congratulation. Tests passed, Here we are going to build APK and AAB Files.'
+          method: 'GET'
+
+      - name: Assemble Release Bundle
+        run: |
+          ./gradlew assembleMuseumENRelease
+          ./gradlew assembleMuseumNLRelease
+          ./gradlew bundleMuseumENRelease
+          ./gradlew bundleMuseumNLRelease
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Artifacts
+          path: |
+            app/build/outputs/apk/MuseumEN/release
+            app/build/outputs/apk/MuseumNL/release
+            app/build/outputs/bundle/MuseumNLRelease
+            app/build/outputs/bundle/MuseumENRelease
+
+      - name: Send final result message telegram
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://api.telegram.org/bot2107738794:AAH-MO-gHIvCLvTGWtRXkMXDUfwZTX2w-yk/sendMessage?chat_id=-1001606745035
+                &text=Yeeees, Good job. you can see the results on github action. Have fun :)'
+          method: 'GET'
+
