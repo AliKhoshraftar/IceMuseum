@@ -55,10 +55,6 @@ android {
     }
 
     signingConfigs {
-        debug {
-            minifyEnabled false
-        }
-
         release {
             storeFile file("keystore/sign.jks")
             storePassword SIGNING_STORE_PASSWORD
