@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.detail
+package com.icemobile.museum.presentation.ui.screen.detail
 
 import com.icemobile.museum.domain.model.collection.detail.CollectionDetail
 

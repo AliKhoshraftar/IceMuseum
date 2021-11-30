@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.detail
+package com.icemobile.museum.presentation.ui.screen.detail
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -10,7 +10,7 @@ import com.icemobile.museum.common.Constants.EMPTY
 import com.icemobile.museum.common.Response
 import com.icemobile.museum.domain.model.collection.detail.CollectionDetail
 import com.icemobile.museum.domain.usecase.get_collection_detail.GetCollectionDetailUseCase
-import com.icemobile.museum.presentation.util.FakeData
+import com.icemobile.museum.domain.util.FakeData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

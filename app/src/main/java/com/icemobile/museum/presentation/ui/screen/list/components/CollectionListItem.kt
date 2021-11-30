@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.list.components
+package com.icemobile.museum.presentation.ui.screen.list.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,7 +36,7 @@ fun CollectionListItem(
             Image(
                 painter = rememberImagePainter(data = art.headerImage.url,
                     builder = {
-                        crossfade(800)
+                        crossfade(700)
                     }),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,

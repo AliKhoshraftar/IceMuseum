@@ -6,12 +6,8 @@ import androidx.annotation.Keep
 
 @Keep
 data class Dimension(
-    @SerializedName("unit")
     val unit: String,
-    @SerializedName("type")
     val type: String,
-    @SerializedName("part")
     val part: Any?,
-    @SerializedName("value")
     val value: String
 )
