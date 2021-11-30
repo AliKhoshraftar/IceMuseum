@@ -14,8 +14,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.icemobile.museum.R
-import com.icemobile.museum.presentation.detail.CollectionDetailScreen
-import com.icemobile.museum.presentation.list.CollectionListScreen
+import com.icemobile.museum.presentation.ui.screen.Screen
+import com.icemobile.museum.presentation.ui.screen.detail.CollectionDetailScreen
+import com.icemobile.museum.presentation.ui.screen.list.CollectionListScreen
 import com.icemobile.museum.presentation.ui.theme.MuseumAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

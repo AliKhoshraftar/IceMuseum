@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.detail
+package com.icemobile.museum.presentation.ui.screen.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

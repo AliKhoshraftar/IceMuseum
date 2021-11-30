@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.list
+package com.icemobile.museum.presentation.ui.screen.list
 
 import com.google.common.truth.Truth.assertThat
 import com.icemobile.museum.data.repository.FakeCollectionRepository
@@ -6,8 +6,6 @@ import com.icemobile.museum.domain.usecase.get_collections.GetCollectionsUseCase
 import com.icemobile.museum.util.uiJob
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before

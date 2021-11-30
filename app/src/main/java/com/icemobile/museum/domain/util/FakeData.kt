@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.util
+package com.icemobile.museum.domain.util
 
 import com.icemobile.museum.data.remote.model.collection.share.WebImage
 import com.icemobile.museum.domain.model.collection.detail.ArtObjectDetail

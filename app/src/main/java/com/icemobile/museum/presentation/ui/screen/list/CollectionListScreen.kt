@@ -1,4 +1,4 @@
-package com.icemobile.museum.presentation.list
+package com.icemobile.museum.presentation.ui.screen.list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.icemobile.museum.common.Constants.PAGE_SIZE
-import com.icemobile.museum.presentation.Screen
-import com.icemobile.museum.presentation.list.components.CollectionListItem
+import com.icemobile.museum.presentation.ui.screen.Screen
+import com.icemobile.museum.presentation.ui.screen.list.components.CollectionListItem
 import com.icemobile.museum.presentation.ui.component.SearchAppBar
 
 @ExperimentalComposeUiApi
